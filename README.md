@@ -52,7 +52,9 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 ### Custumer CRUD
 ![Swagger UI Screenshot](./screens/swagger_ui.png)
 
-### banck account CRUD
+### bank account CRUD
 ![Bank Account CRUD Swagger UI Screenshot](./screens/swagger_bankaccount.png)
 
+### Testing the "/accounts" Endpoint
+![alt text](./screens/accounts_endpoint.png)
 
