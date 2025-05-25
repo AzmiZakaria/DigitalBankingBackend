@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Service @Transactional @AllArgsConstructor @Slf4j
+@Service @Transactional @AllArgsConstructor
 public class BankAccountServiceImpl implements BankAccountService {
     private CustumerRepository customerRepository;
     private BankAccountRepository bankAccountRepository;
@@ -22,7 +22,6 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        log.info("Saving new Customer");
         return customerRepository.save(customer);
     }
 

@@ -2,7 +2,6 @@ package ma.enset.bdcc.azmi.backend.services;
 
 import java.util.List;
 import ma.enset.bdcc.azmi.backend.entities.*;
-import org.springframework.data.domain.Page;
 
 public interface BankAccountService {
     Customer saveCustomer(Customer customer);
