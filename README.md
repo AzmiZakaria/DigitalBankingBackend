@@ -10,3 +10,6 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ### Database Tables Overview
 ![Database Tables Screenshot](./screens/db_tables.png)
+
+### Interface JPA Repositories
+![Repositories Interface Screenshot](./screens/repo_interfaces.png)
