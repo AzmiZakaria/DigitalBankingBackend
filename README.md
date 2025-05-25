@@ -13,3 +13,6 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ### Interface JPA Repositories
 ![Repositories Interface Screenshot](./screens/repo_interfaces.png)
+
+## Testing the DAO Layer
+![DAO Testing Screenshot](./screens/DAO_test.png)
