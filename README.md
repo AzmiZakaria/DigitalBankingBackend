@@ -27,3 +27,10 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ### Operation Table Overview
 ![Operation Table Screenshot](./screens/serv_operation_table.png)
+## REST Controllers
+
+### Customer REST Controller
+![Customer REST Controller Screenshot](./screens/custumer_restcintroller.png)
+
+### Testing the "/customers" Endpoint
+![Test Customers Endpoint Screenshot](./screens/custumer_controller_test.png)
