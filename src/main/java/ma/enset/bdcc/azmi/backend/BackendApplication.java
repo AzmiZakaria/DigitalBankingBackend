@@ -66,7 +66,7 @@ public class BackendApplication {
                 // Test listCustomers
                 System.out.println("=== List of Customers ===");
                 bankAccountService.listCustomers().forEach(customer -> {
-                    System.out.println(customer.getName() + " : " + customer.getEmail());
+                    System.out.println(customer.getName() );
                 });
 
             } catch (Exception e) {

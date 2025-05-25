@@ -1,13 +1,15 @@
 package ma.enset.bdcc.azmi.backend.services;
 
 import java.util.List;
+
+import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
 import ma.enset.bdcc.azmi.backend.entities.*;
 
 public interface BankAccountService {
     Customer saveCustomer(Customer customer);
     CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId);
     SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, Long customerId);
-    List<Customer> listCustomers();
+    List<CustomerDTO> listCustomers();
     BankAccount getBankAccount(String accountId);
     List<BankAccount> listBankAccounts();
 

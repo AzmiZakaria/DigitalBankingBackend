@@ -34,3 +34,13 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ### Testing the "/customers" Endpoint
 ![Test Customers Endpoint Screenshot](./screens/custumer_controller_test.png)
+
+## DTO 
+### Customer DTO  Implementation
+![Customer DTO Screenshot](./screens/customerdto.png)
+
+### CustomerMapper: Entity-DTO Conversion
+![CustomerMapper Screenshot](./screens/mappercustumer.png)
+
+### Updated Customer List Controller (Using DTO)
+![Customer List Controller DTO Screenshot](./screens/getcustumers_dto.png)
