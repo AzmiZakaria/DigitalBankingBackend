@@ -24,3 +24,6 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 ![BankAccountService Interface Screenshot](./screens/interface_BankAccountService.png)
 ### Test Service layer
 ![Service Layer Test Screenshot](./screens/test_service.png)
+
+### Operation Table Overview
+![Operation Table Screenshot](./screens/serv_operation_table.png)
