@@ -47,3 +47,6 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ### Save custumer using DTO in RestController
 ![Save Customer DTO Screenshot](./screens/savecustumerdto_restcontroller.png)
+
+## Integration Swagger UI
+![Swagger UI Screenshot](./screens/swagger_ui.png)
