@@ -120,4 +120,28 @@ public class BankAccountServiceImpl implements BankAccountService {
         debit(accountIdSource, amount, "Transfer to " + accountIdDestination);
         credit(accountIdDestination, amount, "Transfer from " + accountIdSource);
     }
+
+    @Override
+    public CustomerDTO getCustomer(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+        return dtoMapper.fromCustomer(customer);
+    }
+
+    @Override
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerRepository.findById(customerDTO.getId())
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+        customer.setName(customerDTO.getName());
+        customer.setEmail(customerDTO.getEmail());
+        Customer updatedCustomer = customerRepository.save(customer);
+        return dtoMapper.fromCustomer(updatedCustomer);
+    }
+
+    @Override
+    public void deleteCustomer(Long customerId) {
+        customerRepository.findById(customerId)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+        customerRepository.deleteById(customerId);
+    }
 }
