@@ -58,6 +58,8 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 ### Testing the "/accounts" Endpoint
 ![alt text](./screens/accounts_endpoint.png)
 
+### Account operations test
+![alt text](./screens/account_operations.png)
+
 ### Account history test
 ![alt text](./screens/account_history.png)
-

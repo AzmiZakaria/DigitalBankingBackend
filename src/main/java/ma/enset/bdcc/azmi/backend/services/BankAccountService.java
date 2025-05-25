@@ -19,4 +19,5 @@ public interface BankAccountService {
     void transfer(String accountIdSource, String accountIdDestination, double amount);
 
     List<AccountOperationDTO> accountHistory(String accountId);
+    AccountHistoryDTO getAccountHistory(String accountId, int page, int size);
 }

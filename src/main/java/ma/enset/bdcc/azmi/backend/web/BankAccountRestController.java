@@ -45,31 +45,12 @@ public class BankAccountRestController {
          return bankAccountService.accountHistory(accountId);
      }
 
-    // @GetMapping("/{accountId}/pageOperations")
-    // public AccountHistoryDTO getAccountHistory(
-    //         @PathVariable String accountId,
-    //         @RequestParam(name = "page", defaultValue = "0") int page,
-    //         @RequestParam(name = "size", defaultValue = "5") int size) {
-    //     return bankAccountService.getAccountHistory(accountId, page, size);
-    // }
+    @GetMapping("/{accountId}/pageOperations")
+    public AccountHistoryDTO getAccountHistory(
+            @PathVariable String accountId,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size) {
+        return bankAccountService.getAccountHistory(accountId, page, size);
+    }
 
-    // @PostMapping("/debit")
-    // public DebitDTO debit(@RequestBody DebitDTO debitDTO) {
-    //     this.bankAccountService.debit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
-    //     return debitDTO;
-    // }
-
-    // @PostMapping("/credit")
-    // public CreditDTO credit(@RequestBody CreditDTO creditDTO) {
-    //     this.bankAccountService.credit(creditDTO.getAccountId(), creditDTO.getAmount(), creditDTO.getDescription());
-    //     return creditDTO;
-    // }
-
-    // @PostMapping("/transfer")
-    // public void transfer(@RequestBody TransferRequestDTO transferRequestDTO) {
-    //     this.bankAccountService.transfer(
-    //             transferRequestDTO.getAccountSource(),
-    //             transferRequestDTO.getAccountDestination(),
-    //             transferRequestDTO.getAmount());
-    // }
 }

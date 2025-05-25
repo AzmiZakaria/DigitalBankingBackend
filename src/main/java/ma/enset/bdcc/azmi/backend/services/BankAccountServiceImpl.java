@@ -8,6 +8,8 @@ import ma.enset.bdcc.azmi.backend.repositories.AccountOperationRepository;
 import ma.enset.bdcc.azmi.backend.repositories.BankAccountRepository;
 import ma.enset.bdcc.azmi.backend.repositories.CustumerRepository;
 import ma.enset.bdcc.azmi.backend.enums.OperationType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -167,4 +169,23 @@ public class BankAccountServiceImpl implements BankAccountService {
             .map(op -> dtoMapper.fromAccountOperation(op))
             .collect(Collectors.toList());
     }
+
+    @Override
+    public AccountHistoryDTO getAccountHistory(String accountId, int page, int size) {
+        BankAccount bankAccount=bankAccountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("bank account not found"));
+        ;
+        Page<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountIdOrderByOperationDateDesc(accountId, PageRequest.of(page, size));
+        AccountHistoryDTO accountHistoryDTO=new AccountHistoryDTO();
+        List<AccountOperationDTO> accountOperationDTOS = accountOperations.getContent().stream().map(op -> dtoMapper.fromAccountOperation(op)).collect(Collectors.toList());
+        accountHistoryDTO.setAccountOperationDTOS(accountOperationDTOS);
+        accountHistoryDTO.setAccountId(bankAccount.getId());
+        accountHistoryDTO.setBalance(bankAccount.getBalance());
+        accountHistoryDTO.setCurrentPage(page);
+        accountHistoryDTO.setPageSize(size);
+        accountHistoryDTO.setTotalPages(accountOperations.getTotalPages());
+        return accountHistoryDTO;
+    }
+
+
 }
