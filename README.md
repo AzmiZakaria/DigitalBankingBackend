@@ -44,3 +44,6 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ### Updated Customer List Controller (Using DTO)
 ![Customer List Controller DTO Screenshot](./screens/getcustumers_dto.png)
+
+### Save custumer using DTO in RestController
+![Save Customer DTO Screenshot](./screens/savecustumerdto_restcontroller.png)

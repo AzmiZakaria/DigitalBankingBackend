@@ -1,5 +1,6 @@
 package ma.enset.bdcc.azmi.backend;
 
+import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
 import ma.enset.bdcc.azmi.backend.entities.*;
 import ma.enset.bdcc.azmi.backend.enums.AccountStatus;
 import ma.enset.bdcc.azmi.backend.enums.OperationType;
@@ -28,19 +29,19 @@ public class BackendApplication {
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService) {
         return args -> {
             try {
-                // Test saveCustomer
-                Customer customer1 = new Customer();
-                customer1.setName("zakaria");
-                customer1.setEmail("zakaria@gmail.com");
-                bankAccountService.saveCustomer(customer1);
-                System.out.println("=== Customer saved successfully ===");
+                // Test saveCustomer with DTO
+                CustomerDTO customerDTO = new CustomerDTO();
+                customerDTO.setName("zakaria");
+                customerDTO.setEmail("zakaria@gmail.com");
+                CustomerDTO savedCustomer = bankAccountService.saveCustomer(customerDTO);
+                System.out.println("=== Customer saved successfully with ID: " + savedCustomer.getId());
 
                 // Test saveCurrentBankAccount
-                CurrentAccount currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, customer1.getId());
+                CurrentAccount currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, savedCustomer.getId());
                 System.out.println("=== Current Account created: " + currentAccount.getId());
 
                 // Test saveSavingBankAccount
-                SavingAccount savingAccount = bankAccountService.saveSavingBankAccount(12000, 5.5, customer1.getId());
+                SavingAccount savingAccount = bankAccountService.saveSavingBankAccount(12000, 5.5, savedCustomer.getId());
                 System.out.println("=== Saving Account created: " + savingAccount.getId());
 
                 // Test credit operation

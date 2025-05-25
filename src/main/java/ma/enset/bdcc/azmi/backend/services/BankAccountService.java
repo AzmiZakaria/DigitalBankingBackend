@@ -6,7 +6,7 @@ import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
 import ma.enset.bdcc.azmi.backend.entities.*;
 
 public interface BankAccountService {
-    Customer saveCustomer(Customer customer);
+    CustomerDTO saveCustomer(CustomerDTO customerDTO); // Changed this line
     CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId);
     SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, Long customerId);
     List<CustomerDTO> listCustomers();
