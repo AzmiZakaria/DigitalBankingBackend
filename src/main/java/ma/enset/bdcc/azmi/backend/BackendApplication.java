@@ -1,6 +1,9 @@
 package ma.enset.bdcc.azmi.backend;
 
+import ma.enset.bdcc.azmi.backend.dtos.BankAccountDTO;
+import ma.enset.bdcc.azmi.backend.dtos.CurrentBankAccountDTO;
 import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
+import ma.enset.bdcc.azmi.backend.dtos.SavingBankAccountDTO;
 import ma.enset.bdcc.azmi.backend.entities.*;
 import ma.enset.bdcc.azmi.backend.enums.AccountStatus;
 import ma.enset.bdcc.azmi.backend.enums.OperationType;
@@ -25,7 +28,7 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService) {
         return args -> {
             try {
@@ -37,11 +40,11 @@ public class BackendApplication {
                 System.out.println("=== Customer saved successfully with ID: " + savedCustomer.getId());
 
                 // Test saveCurrentBankAccount
-                CurrentAccount currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, savedCustomer.getId());
+                CurrentBankAccountDTO currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, savedCustomer.getId());
                 System.out.println("=== Current Account created: " + currentAccount.getId());
 
                 // Test saveSavingBankAccount
-                SavingAccount savingAccount = bankAccountService.saveSavingBankAccount(12000, 5.5, savedCustomer.getId());
+                SavingBankAccountDTO savingAccount = bankAccountService.saveSavingBankAccount(12000, 5.5, savedCustomer.getId());
                 System.out.println("=== Saving Account created: " + savingAccount.getId());
 
                 // Test credit operation
@@ -59,15 +62,14 @@ public class BackendApplication {
                     1000
                 );
                 System.out.println("=== Transfer operation done ===");
-
                 // Test getBankAccount
-                BankAccount retrievedAccount = bankAccountService.getBankAccount(currentAccount.getId());
+                BankAccountDTO retrievedAccount = bankAccountService.getBankAccount(currentAccount.getId());
                 System.out.println("=== Retrieved account balance: " + retrievedAccount.getBalance());
 
                 // Test listCustomers
                 System.out.println("=== List of Customers ===");
                 bankAccountService.listCustomers().forEach(customer -> {
-                    System.out.println(customer.getName() );
+                    System.out.println(customer.getName());
                 });
 
             } catch (Exception e) {

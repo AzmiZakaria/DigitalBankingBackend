@@ -49,4 +49,10 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 ![Save Customer DTO Screenshot](./screens/savecustumerdto_restcontroller.png)
 
 ## Integration Swagger UI
+### Custumer CRUD
 ![Swagger UI Screenshot](./screens/swagger_ui.png)
+
+### banck account CRUD
+![Bank Account CRUD Swagger UI Screenshot](./screens/swagger_bankaccount.png)
+
+
