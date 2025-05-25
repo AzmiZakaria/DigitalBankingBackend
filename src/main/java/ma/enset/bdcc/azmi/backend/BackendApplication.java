@@ -6,6 +6,7 @@ import ma.enset.bdcc.azmi.backend.enums.OperationType;
 import ma.enset.bdcc.azmi.backend.repositories.AccountOperationRepository;
 import ma.enset.bdcc.azmi.backend.repositories.BankAccountRepository;
 import ma.enset.bdcc.azmi.backend.repositories.CustumerRepository;
+import ma.enset.bdcc.azmi.backend.services.BankAccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,14 +18,65 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-public class  BackendApplication {
+public class BackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
 
     @Bean
-    @Transactional
+    CommandLineRunner commandLineRunner(BankAccountService bankAccountService) {
+        return args -> {
+            try {
+                // Test saveCustomer
+                Customer customer1 = new Customer();
+                customer1.setName("zakaria");
+                customer1.setEmail("zakaria@gmail.com");
+                bankAccountService.saveCustomer(customer1);
+                System.out.println("=== Customer saved successfully ===");
+
+                // Test saveCurrentBankAccount
+                CurrentAccount currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, customer1.getId());
+                System.out.println("=== Current Account created: " + currentAccount.getId());
+
+                // Test saveSavingBankAccount
+                SavingAccount savingAccount = bankAccountService.saveSavingBankAccount(12000, 5.5, customer1.getId());
+                System.out.println("=== Saving Account created: " + savingAccount.getId());
+
+                // Test credit operation
+                bankAccountService.credit(currentAccount.getId(), 1000, "First credit");
+                System.out.println("=== Credit operation done ===");
+
+                // Test debit operation
+                bankAccountService.debit(currentAccount.getId(), 500, "First debit");
+                System.out.println("=== Debit operation done ===");
+
+                // Test transfer
+                bankAccountService.transfer(
+                    currentAccount.getId(),
+                    savingAccount.getId(),
+                    1000
+                );
+                System.out.println("=== Transfer operation done ===");
+
+                // Test getBankAccount
+                BankAccount retrievedAccount = bankAccountService.getBankAccount(currentAccount.getId());
+                System.out.println("=== Retrieved account balance: " + retrievedAccount.getBalance());
+
+                // Test listCustomers
+                System.out.println("=== List of Customers ===");
+                bankAccountService.listCustomers().forEach(customer -> {
+                    System.out.println(customer.getName() + " : " + customer.getEmail());
+                });
+
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        };
+    }
+
+    // @Bean @Transactional
     CommandLineRunner start(CustumerRepository custumerRepository,
                             BankAccountRepository bankAccountRepository,
                             AccountOperationRepository accountOperationRepository){

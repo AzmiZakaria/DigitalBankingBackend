@@ -67,6 +67,11 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
+    public List<BankAccount> listBankAccounts() {
+        return bankAccountRepository.findAll();
+    }
+
+    @Override
     public void debit(String accountId, double amount, String description) {
         BankAccount bankAccount = getBankAccount(accountId);
         if (bankAccount.getBalance() < amount)
