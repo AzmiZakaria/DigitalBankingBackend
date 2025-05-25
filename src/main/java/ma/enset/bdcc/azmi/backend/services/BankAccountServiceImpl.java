@@ -1,10 +1,7 @@
 package ma.enset.bdcc.azmi.backend.services;
 
 import lombok.AllArgsConstructor;
-import ma.enset.bdcc.azmi.backend.dtos.BankAccountDTO;
-import ma.enset.bdcc.azmi.backend.dtos.CurrentBankAccountDTO;
-import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
-import ma.enset.bdcc.azmi.backend.dtos.SavingBankAccountDTO;
+import ma.enset.bdcc.azmi.backend.dtos.*;
 import ma.enset.bdcc.azmi.backend.entities.*;
 import ma.enset.bdcc.azmi.backend.mappers.BankAccountMapperImpl;
 import ma.enset.bdcc.azmi.backend.repositories.AccountOperationRepository;
@@ -162,5 +159,12 @@ public class BankAccountServiceImpl implements BankAccountService {
         customerRepository.findById(customerId)
             .orElseThrow(() -> new RuntimeException("Customer not found"));
         customerRepository.deleteById(customerId);
+    }
+    @Override
+    public List<AccountOperationDTO> accountHistory(String accountId) {
+    List<AccountOperation> accountOperations= accountOperationRepository.findByBankAccountId(accountId);
+        return accountOperations.stream()
+            .map(op -> dtoMapper.fromAccountOperation(op))
+            .collect(Collectors.toList());
     }
 }

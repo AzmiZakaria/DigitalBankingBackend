@@ -1,8 +1,10 @@
 package ma.enset.bdcc.azmi.backend.mappers;
 
+import ma.enset.bdcc.azmi.backend.dtos.AccountOperationDTO;
 import ma.enset.bdcc.azmi.backend.dtos.CurrentBankAccountDTO;
 import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
 import ma.enset.bdcc.azmi.backend.dtos.SavingBankAccountDTO;
+import ma.enset.bdcc.azmi.backend.entities.AccountOperation;
 import ma.enset.bdcc.azmi.backend.entities.CurrentAccount;
 import ma.enset.bdcc.azmi.backend.entities.Customer;
 import ma.enset.bdcc.azmi.backend.entities.SavingAccount;
@@ -49,6 +51,11 @@ public class BankAccountMapperImpl {
         BeanUtils.copyProperties(currentBankAccountDTO,currentAccount);
         currentAccount.setCustomer(fromCustomerDTO(currentBankAccountDTO.getCustomerDTO()));
         return currentAccount;
+    }
+    public AccountOperationDTO fromAccountOperation(AccountOperation accountOperation){
+        AccountOperationDTO accountOperationDTO=new AccountOperationDTO();
+        BeanUtils.copyProperties(accountOperation,accountOperationDTO);
+        return accountOperationDTO;
     }
 
 }

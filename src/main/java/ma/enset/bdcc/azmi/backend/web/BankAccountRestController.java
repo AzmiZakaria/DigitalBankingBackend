@@ -40,10 +40,10 @@ public class BankAccountRestController {
         return bankAccountService.bankAccountList();
     }
 
-    // @GetMapping("/{accountId}/operations")
-    // public List<AccountOperationDTO> getHistory(@PathVariable String accountId) {
-    //     return bankAccountService.accountHistory(accountId);
-    // }
+     @GetMapping("/{accountId}/operations")
+     public List<AccountOperationDTO> getHistory(@PathVariable String accountId) {
+         return bankAccountService.accountHistory(accountId);
+     }
 
     // @GetMapping("/{accountId}/pageOperations")
     // public AccountHistoryDTO getAccountHistory(

@@ -17,4 +17,6 @@ public interface BankAccountService {
     void debit(String accountId, double amount, String description);
     void credit(String accountId, double amount, String description);
     void transfer(String accountIdSource, String accountIdDestination, double amount);
+
+    List<AccountOperationDTO> accountHistory(String accountId);
 }
