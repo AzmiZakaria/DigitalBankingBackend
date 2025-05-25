@@ -16,3 +16,9 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ## Testing the DAO Layer
 ![DAO Testing Screenshot](./screens/DAO_test.png)
+
+## Service Layer Implementation
+![Service Layer Screenshot](./screens/service.png)
+
+### Interface BankAccountService
+![BankAccountService Interface Screenshot](./screens/interface_BankAccountService.png)
