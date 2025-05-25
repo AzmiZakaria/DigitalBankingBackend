@@ -7,3 +7,6 @@ This project is a **Spring Boot** backend for a digital banking application. It 
 
 ## Entity Design and Relationships
 ![alt text](./screens/entities.png)
+
+### Database Tables Overview
+![Database Tables Screenshot](./screens/db_tables.png)
