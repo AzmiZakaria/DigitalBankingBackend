@@ -53,4 +53,33 @@ public class BankAccountRestController {
         return bankAccountService.getAccountHistory(accountId, page, size);
     }
 
+    @PostMapping("/debit")
+    public DebitDTO debit(@RequestBody DebitDTO debitDTO) {
+        bankAccountService.debit(
+            debitDTO.getAccountId(),
+            debitDTO.getAmount(),
+            debitDTO.getDescription()
+        );
+        return debitDTO;
+    }
+
+    @PostMapping("/credit")
+    public CreditDTO credit(@RequestBody CreditDTO creditDTO) {
+        bankAccountService.credit(
+            creditDTO.getAccountId(),
+            creditDTO.getAmount(),
+            creditDTO.getDescription()
+        );
+        return creditDTO;
+    }
+
+    @PostMapping("/transfer")
+    public void transfer(@RequestBody TransferRequestDTO transferRequestDTO) {
+        bankAccountService.transfer(
+            transferRequestDTO.getAccountSource(),
+            transferRequestDTO.getAccountDestination(),
+            transferRequestDTO.getAmount()
+        );
+    }
+
 }
