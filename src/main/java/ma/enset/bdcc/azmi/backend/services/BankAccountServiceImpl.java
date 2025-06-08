@@ -72,6 +72,14 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        List<Customer> customers = customerRepository.searchCustomers(keyword);
+        return customers.stream()
+                .map(customer -> dtoMapper.fromCustomer(customer))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public BankAccountDTO getBankAccount(String accountId) {
         BankAccount bankAccount = bankAccountRepository.findById(accountId)
             .orElseThrow(() -> new RuntimeException("Bank Account not found"));

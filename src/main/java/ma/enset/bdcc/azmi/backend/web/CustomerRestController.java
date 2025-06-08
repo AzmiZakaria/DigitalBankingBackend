@@ -3,6 +3,7 @@ package ma.enset.bdcc.azmi.backend.web;
 import lombok.AllArgsConstructor;
 import ma.enset.bdcc.azmi.backend.dtos.CustomerDTO;
 import ma.enset.bdcc.azmi.backend.services.BankAccountService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +14,15 @@ import java.util.List;
 public class CustomerRestController {
     private BankAccountService bankAccountService;
 
-    @GetMapping("/customers")
-    public List<CustomerDTO> customers() {
-        return bankAccountService.listCustomers();
+     @GetMapping("/customers")
+     public List<CustomerDTO> customers() {
+         return bankAccountService.listCustomers();
+     }
+    @GetMapping("/customers/search")
+    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword", defaultValue = "") String keyword) {
+        return bankAccountService.searchCustomers(keyword);
     }
-
+    
     @GetMapping("/customers/{id}")
     public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerId) {
         return bankAccountService.getCustomer(customerId);

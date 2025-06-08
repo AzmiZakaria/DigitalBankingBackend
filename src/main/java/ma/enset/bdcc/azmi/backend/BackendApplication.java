@@ -31,6 +31,7 @@ public class BackendApplication {
    @Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService) {
         return args -> {
+            
             try {
                 // Test saveCustomer with DTO
                 CustomerDTO customerDTO = new CustomerDTO();
@@ -38,7 +39,12 @@ public class BackendApplication {
                 customerDTO.setEmail("zakaria@gmail.com");
                 CustomerDTO savedCustomer = bankAccountService.saveCustomer(customerDTO);
                 System.out.println("=== Customer saved successfully with ID: " + savedCustomer.getId());
-
+                Stream.of("yassine", "hamza", "amine", "fatima", "salma", "ayoub", "sara", "mohamed", "iman", "reda").forEach(name->{
+                    CustomerDTO customer = new CustomerDTO();
+                    customer.setName(name);
+                    customer.setEmail(name+"@gmail.com");
+                    bankAccountService.saveCustomer(customer);
+                });
                 // Test saveCurrentBankAccount
                 CurrentBankAccountDTO currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, savedCustomer.getId());
                 System.out.println("=== Current Account created: " + currentAccount.getId());
