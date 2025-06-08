@@ -15,7 +15,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.UUID;
@@ -45,6 +44,39 @@ public class BackendApplication {
                     customer.setEmail(name+"@gmail.com");
                     bankAccountService.saveCustomer(customer);
                 });
+                bankAccountService.listCustomers().forEach(customer -> {
+                    try {
+                        // Create a current account
+                        CurrentBankAccountDTO currentAccountDTO = bankAccountService.saveCurrentBankAccount(
+                                Math.random() * 9000 + 1000, // balance between 1000 and 10000
+                                5000, // overdraft
+                                customer.getId()
+                        );
+                        // Create a saving account
+                        SavingBankAccountDTO savingAccountDTO = bankAccountService.saveSavingBankAccount(
+                                Math.random() * 9000 + 1000, // balance between 1000 and 10000
+                                4.5, // interest rate
+                                customer.getId()
+                        );
+                        // Make some operations on current account
+                        bankAccountService.credit(currentAccountDTO.getId(), 2000, "Initial credit");
+                        bankAccountService.debit(currentAccountDTO.getId(), 500, "Initial debit");
+                        bankAccountService.credit(currentAccountDTO.getId(), 1200, "Salary deposit");
+                        bankAccountService.debit(currentAccountDTO.getId(), 300, "Grocery shopping");
+                        bankAccountService.credit(currentAccountDTO.getId(), 800, "Refund");
+                        bankAccountService.debit(currentAccountDTO.getId(), 100, "Coffee shop");
+                        // Make some operations on saving account
+                        bankAccountService.credit(savingAccountDTO.getId(), 1500, "Initial credit");
+                        bankAccountService.debit(savingAccountDTO.getId(), 300, "Initial debit");
+                        bankAccountService.credit(savingAccountDTO.getId(), 700, "Monthly saving");
+                        bankAccountService.debit(savingAccountDTO.getId(), 200, "Emergency withdrawal");
+                        bankAccountService.credit(savingAccountDTO.getId(), 500, "Bonus");
+                        bankAccountService.debit(savingAccountDTO.getId(), 100, "Online purchase");
+                    } catch (Exception e) {
+                        System.err.println("Error creating accounts or operations for customer " + customer.getName() + ": " + e.getMessage());
+                    }
+                });
+                
                 // Test saveCurrentBankAccount
                 CurrentBankAccountDTO currentAccount = bankAccountService.saveCurrentBankAccount(10000, 5000, savedCustomer.getId());
                 System.out.println("=== Current Account created: " + currentAccount.getId());
